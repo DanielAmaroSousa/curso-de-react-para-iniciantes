@@ -18,7 +18,7 @@ import "./task.css"
 const Task = ({ task }) => {
     return ( 
         <div className="task-container">
-            {task.title};
+            {task.title}
         </div> 
     );
 }
