@@ -1,52 +1,29 @@
-import React, { useState } from "react";
-import {v4 as uuidv4} from 'uuid'; //uuid gerador de id aleatório
+import React from "react";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-import Tasks from "./components/tasks";
-import AddTask from "./components/addtask";
+import Header from "./components/Header";
+import TaskDetails from "./components/TaskDetails";
+import Base from "./components/Base";
 
 import "./App.css";
 
+
 const App = () => {
-    //let message = "Hello World";
-    const [tasks, setTasks] = useState([
-        {
-            id: "1",
-            title: "Estudar Programação",
-            completed: false, 
-        },
-        {
-            id: "2",
-            title: "Ler Livros",
-            completed: true, 
-        }, 
-    ]);
-
-    const handleTaskAddition = (taskTitle) => {
-        const newTasks = [... tasks,
-        {
-            title: taskTitle,
-            //id: Math.random(10),
-            id: uuidv4(),
-            completed: false,
-        },
-        ];
-
-        setTasks(newTasks);
-    }
-
-    const handleTaskClick = (taskId) => {
-        
-    }
-
-
+ 
     return (
-    <>
+    <Router>
         <div className="container">
-            <AddTask handleTaskAddition={handleTaskAddition}/>
-            <Tasks tasks = {tasks}/>
+            <Header />
+            <Routes>
+                <Route path="/" 
+                    exact //se não colocar o exact ele pega toda a path que contenha "/"
+                    element={<Base/>}/>
+                <Route path="/:taskTitle" exact element={<TaskDetails/>} />
+            </Routes>
+              
         </div>
         
-    </>
+    </Router>
     
     );
 };
